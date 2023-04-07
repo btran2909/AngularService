@@ -1,0 +1,17 @@
+<main *ngIf="pagedResultDto" class="container mt-5">
+  <div class="row">
+    <div *ngFor="let item of pagedResultDto.items; let i = index" class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" src="https://via.placeholder.com/350x225" alt="Card image cap">
+        <div class="card-body">
+          <h4 class="card-title">{{item?.sku}}</h4>
+          <p class="card-text">{{item?.desc}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Buy</button>
+            <small class="text-muted">${{item.fowprice}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
