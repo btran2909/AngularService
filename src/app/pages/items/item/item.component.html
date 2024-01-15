@@ -1,4 +1,4 @@
-<main *ngIf="pagedResultDto" class="container mt-5">
+<div *ngIf="pagedResultDto" class="container mt-5">
   <div class="row">
     <div *ngFor="let item of pagedResultDto.items; let i = index" class="col-md-4">
       <div class="card mb-4 box-shadow">
@@ -14,4 +14,4 @@
       </div>
     </div>
   </div>
-</main>
+</div>
