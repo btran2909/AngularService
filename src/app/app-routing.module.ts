@@ -1,20 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ITEMS, LICS } from './utils/constants/routes';
+import { AUTHS, ERRORS } from './shared/constants/routes';
 
 const routes: Routes = [
   {
-    path: LICS.PATH,
-    loadChildren: () => import('./pages/lics/lics.module').then(m => m.LicsModule),
+    path: '',
+    loadChildren: () => import('./pages/page.module').then((m) => m.pageModule),
   },
   {
-    path: ITEMS.PATH,
-    loadChildren: () => import('./pages/items/items.module').then(m => m.ItemsModule),
+    path: AUTHS.PATH,
+    loadChildren: () =>
+      import('./pages/auths/auths.module').then(
+        (m) => m.AuthsModule
+      ),
+  },
+  {
+    path: ERRORS.PATH,
+    loadChildren: () =>
+      import('./pages/errors/errors.module').then(
+        (m) => m.ErrorsModule
+      ),
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

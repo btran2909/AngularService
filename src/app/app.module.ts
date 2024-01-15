@@ -1,29 +1,25 @@
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import { LoadingInterceptor } from './utils/interceptors/loading-interceptor';
+import { FooterComponent } from './layouts/footer/footer.component';
+import { HeaderComponent } from './layouts/header/header.component';
+import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    LoginComponent,
-    RegisterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     { provide: 'API_BASE_URL', useValue: environment.baseUrl },
