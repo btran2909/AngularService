@@ -4,7 +4,7 @@ import { ERRORS_DECLARATIONS } from './declarations';
 import { ErrorsRoutingModule } from './errors-routing.module';
 
 @NgModule({
-  declarations: [...ERRORS_DECLARATIONS],
+  declarations: ERRORS_DECLARATIONS,
   imports: [
     CommonModule,
     ErrorsRoutingModule

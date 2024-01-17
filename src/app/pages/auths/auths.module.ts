@@ -4,7 +4,7 @@ import { AUTHS_DECLARATIONS } from './declarations';
 import { AuthsRoutingModule } from './auths-routing.module';
 
 @NgModule({
-  declarations: [...AUTHS_DECLARATIONS],
+  declarations: AUTHS_DECLARATIONS,
   imports: [
     CommonModule,
     AuthsRoutingModule

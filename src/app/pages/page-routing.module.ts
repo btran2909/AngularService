@@ -1,14 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'src/app/shared/guards/auth-guard';
-import { PermissionGuard } from 'src/app/shared/guards/permission.guard';
-import { ItemComponent } from './items/item/item.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ItemComponent,
-    canActivate: [AuthGuard, PermissionGuard],
+    loadChildren: () => import('./items/items.module').then((m) => m.ItemsModule),
   },
 ];
 

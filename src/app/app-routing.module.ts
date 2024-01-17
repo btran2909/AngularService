@@ -5,7 +5,7 @@ import { AUTHS, ERRORS } from './shared/constants/routes';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/page.module').then((m) => m.pageModule),
+    loadChildren: () => import('./pages/page.module').then((m) => m.PageModule),
   },
   {
     path: AUTHS.PATH,

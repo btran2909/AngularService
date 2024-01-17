@@ -31,6 +31,6 @@ import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
