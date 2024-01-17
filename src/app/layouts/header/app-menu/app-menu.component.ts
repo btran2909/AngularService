@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMenuItemDto } from 'src/app/shared/models/user-pages/header.model';
+import { IMenuItemDto } from 'src/app/shared/models/header.model';
 
 @Component({
   selector: 'app-menu',

@@ -1,27 +1,24 @@
-import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './layouts/footer/footer.component';
-import { HeaderComponent } from './layouts/header/header.component';
 import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LayoutModule } from './layouts/layout.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    AppRoutingModule,
+    LayoutModule
   ],
   providers: [
     { provide: 'API_BASE_URL', useValue: environment.baseUrl },
@@ -31,6 +28,6 @@ import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
