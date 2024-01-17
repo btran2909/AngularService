@@ -16,8 +16,7 @@ import { LayoutService } from 'src/app/layouts/layout.service';
   ],
 })
 export class LoginComponent {
-  valCheck: string[] = ['remember'];
-
+  rememberCheckBox: string[] = ['remember'];
   password!: string;
 
   constructor(public layoutService: LayoutService) {}

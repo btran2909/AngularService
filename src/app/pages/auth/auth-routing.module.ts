@@ -1,25 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AUTH, ERRORS } from 'src/app/shared/constants/routes';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
       {
-        path: 'error',
-        loadChildren: () =>
-          import('./error/error.module').then((m) => m.ErrorModule),
+        path: AUTH.ERROR.PATH,
+        loadChildren: () => import('./error/error.module').then((m) => m.ErrorModule),
       },
       {
-        path: 'access',
-        loadChildren: () =>
-          import('./access/access.module').then((m) => m.AccessModule),
+        path: AUTH.ACCESS.PATH,
+        loadChildren: () => import('./access/access.module').then((m) => m.AccessModule),
       },
       {
-        path: 'login',
-        loadChildren: () =>
-          import('./login/login.module').then((m) => m.LoginModule),
+        path: AUTH.LOGIN.PATH,
+        redirectTo: '/' + AUTH.LOGIN.PATH,
       },
-      { path: '**', redirectTo: '/notfound' },
+      { path: '**', redirectTo: '/' + ERRORS.NOT_FOUND.PATH }
     ]),
   ],
   exports: [RouterModule],

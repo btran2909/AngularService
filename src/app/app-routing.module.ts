@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layouts/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AUTHS, ERRORS } from './shared/constants/routes';
+import { AUTH, ERRORS } from './shared/constants/routes';
 
 const routes: Routes = [
   {
@@ -11,17 +11,17 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () =>
-          import('./pages/dashboard/dashboard.module').then(
-            (m) => m.DashboardModule
-          ),
+        loadChildren: () => import('./pages/page.module').then((m) => m.PageModule),
       },
     ],
   },
   {
-    path: AUTHS.PATH,
-    loadChildren: () =>
-      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+    path: AUTH.LOGIN.PATH,
+    loadChildren: () => import('./pages/auth/login/login.module').then((m) => m.LoginModule),
+  },
+  {
+    path: AUTH.PATH,
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   { path: ERRORS.NOT_FOUND.PATH, component: NotFoundComponent },
   { path: '**', redirectTo: '/' + ERRORS.NOT_FOUND.PATH },
