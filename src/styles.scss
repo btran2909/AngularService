@@ -1,7 +1,7 @@
-@import "primeng/resources/themes/lara-light-blue/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
+$gutter: 1rem; //for primeflex grid system
+@import "assets/styles/layout/layout.scss";
 
-.container {
-  max-width: 100% !important;
-}
+/* PrimeNG */
+@import "../node_modules/primeng/resources/primeng.min.css";
+@import "../node_modules/primeflex/primeflex.scss";
+@import "../node_modules/primeicons/primeicons.css";
