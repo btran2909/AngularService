@@ -1,7 +1,0 @@
-<ul class="navbar-nav">
-  <li *ngFor="let item of menuItems" class="nav-item" (click)="toggleVisibility(item)">
-    <span *ngIf="item.children" class="nav-link">{{ item.title }}</span>
-    <a *ngIf="!item.children" class="nav-link" [routerLink]="item.link">{{ item.title }}</a>
-    <app-menu *ngIf="item.show" [menuItems]="item.children ?? []"></app-menu>
-  </li>
-</ul>

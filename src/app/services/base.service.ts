@@ -1,30 +1,33 @@
-import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BaseService<T> {
-  constructor(private http: HttpClient, @Inject('API_BASE_URL') private baseUrl: string) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('API_BASE_URL') private baseUrl: string
+  ) {}
 
-  getAll(url: string): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${url}`);
+  get<R>(url: string): Observable<R> {
+    return this.http.get<R>(`${this.baseUrl}/${url}`);
   }
 
-  getById(url: string, id: number): Observable<T> {
-    return this.http.get<T>(`${this.baseUrl}/${url}/${id}`);
+  getById<R>(url: string, id: number): Observable<R> {
+    return this.http.get<R>(`${this.baseUrl}/${url}/${id}`);
   }
 
-  create(url: string, entity: T): Observable<T> {
-    return this.http.post<T>(url, entity);
+  create<R>(url: string, entity: T): Observable<R> {
+    return this.http.post<R>(url, entity);
   }
 
-  update(url: string, id: number, entity: T): Observable<T> {
-    return this.http.put<T>(`${this.baseUrl}/${url}/${id}`, entity);
+  update<R>(url: string, id: number, entity: T): Observable<R> {
+    return this.http.put<R>(`${this.baseUrl}/${url}/${id}`, entity);
   }
 
-  delete(url: string, id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${url}/${id}`);
+  delete<R>(url: string, id: number): Observable<R> {
+    return this.http.delete<R>(`${this.baseUrl}/${url}/${id}`);
   }
 }

@@ -3,6 +3,7 @@ import {
   ElementRef
 } from '@angular/core';
 import { LayoutService } from '../layout.service';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html'
