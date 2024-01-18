@@ -1,4 +1,4 @@
-export const ERRORS = {
+export const ERROR = {
   PATH: 'errors',
   PARENT_NAME: '::Menu:Erros',
   NOT_FOUND: {

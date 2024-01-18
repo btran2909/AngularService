@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LayoutModule } from './layouts/layout.module';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
 
 @NgModule({
   declarations: [

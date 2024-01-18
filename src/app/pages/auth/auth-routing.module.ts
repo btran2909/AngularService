@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { AUTH, ERRORS } from 'src/app/shared/constants/routes';
+import { AUTH, ERROR } from 'src/app/shared/constants/routes/index.route';
 
 @NgModule({
   imports: [
@@ -17,7 +17,7 @@ import { AUTH, ERRORS } from 'src/app/shared/constants/routes';
         path: AUTH.LOGIN.PATH,
         redirectTo: '/' + AUTH.LOGIN.PATH,
       },
-      { path: '**', redirectTo: '/' + ERRORS.NOT_FOUND.PATH }
+      { path: '**', redirectTo: '/' + ERROR.NOT_FOUND.PATH }
     ]),
   ],
   exports: [RouterModule],

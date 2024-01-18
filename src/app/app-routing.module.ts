@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layouts/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AUTH, ERRORS } from './shared/constants/routes';
+import { AUTH, ERROR } from './shared/constants/routes/index.route';
 
 const routes: Routes = [
   {
@@ -23,8 +23,8 @@ const routes: Routes = [
     path: AUTH.PATH,
     loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
-  { path: ERRORS.NOT_FOUND.PATH, component: NotFoundComponent },
-  { path: '**', redirectTo: '/' + ERRORS.NOT_FOUND.PATH },
+  { path: ERROR.NOT_FOUND.PATH, component: NotFoundComponent },
+  { path: '**', redirectTo: '/' + ERROR.NOT_FOUND.PATH },
 ];
 
 @NgModule({

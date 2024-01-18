@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BaseService } from 'src/app/services/base.service';
-import { MenuItem } from 'src/app/services/routes/menu-item.route';
+import { MenuItem } from 'src/app/shared/constants/apis/menu-item.route';
 import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
 import { LayoutService } from '../../layout.service';
+import { BaseService } from 'src/app/services/base.service';
 
 @Component({
   selector: 'app-menu',
