@@ -1,4 +1,3 @@
-import { ConfigComponent } from './config/config.component';
 import { FooterComponent } from './footer/footer.component';
 import { LayoutComponent } from './layout.component';
 import { MenuComponent } from './menu/menu.component';
@@ -7,7 +6,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 
 export const LAYOUT_DECLARATIONS = [
-  ConfigComponent,
   FooterComponent,
   LayoutComponent,
   SidebarComponent,

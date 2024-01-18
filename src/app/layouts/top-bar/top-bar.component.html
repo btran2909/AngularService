@@ -1,5 +1,10 @@
 <div class="layout-topbar">
-  <a class="layout-topbar-logo" routerLink="">
+  <a class="layout-topbar-logo desktop" (click)="layoutService.onMenuToggle()">
+    <img src="assets/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
+      alt="logo">
+    <span>B</span>
+  </a>
+  <a class="layout-topbar-logo tablet" routerLink="">
     <img src="assets/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg"
       alt="logo">
     <span>B</span>
@@ -16,9 +21,13 @@
 
   <div #topBarMenu class="layout-topbar-menu"
     [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
-    <button class="p-link layout-topbar-button">
-      <i class="pi pi-calendar"></i>
-      <span>Calendar</span>
+    <button *ngIf="isLightMode" class="p-link layout-topbar-button" (click)="changeTheme('bootstrap4-light-blue', 'light')">
+      <i class="pi pi-moon"></i>
+      <span>Mode light</span>
+    </button>
+    <button *ngIf="!isLightMode" class="p-link layout-topbar-button" (click)="changeTheme('bootstrap4-dark-blue', 'dark')">
+      <i class="pi pi-moon"></i>
+      <span>Mode dark</span>
     </button>
     <button class="p-link layout-topbar-button">
       <i class="pi pi-user"></i>
