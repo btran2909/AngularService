@@ -30,6 +30,10 @@ export class SettingComponent {
 
   @ViewChild('overlayPanelEdit') overlayPanelEdit: OverlayPanel;
 
+  public get labelInvalid() {
+    return this.menuItemForm.get('label')?.invalid && this.menuItemForm.get('label')?.touched;
+  }
+
   constructor(
     private fb: FormBuilder,
     private layoutStore: Store<LayoutState>,
@@ -53,6 +57,7 @@ export class SettingComponent {
   }
 
   onEditSubmit() {
+    if (!this.menuItemForm.valid) return;
     this.layoutStore.dispatch(LayoutActions.updateMenuItem({ data: this.menuItemForm.value }));
   }
 

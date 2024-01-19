@@ -35,9 +35,10 @@
   <ng-template pTemplate>
     <div *ngIf="menuItemForm" class="card p-fluid">
       <form [formGroup]="menuItemForm">
-        <div class="field">
+        <div class="field p-fluid">
           <label htmlFor="label">Label</label>
-          <input pInputText pAutoFocus [autofocus]="true" id="label" type="text" formControlName="label" />
+          <input pInputText pAutoFocus [autofocus]="true" id="label" type="text" formControlName="label" [ngClass]="{ 'ng-invalid': labelInvalid }" />
+          <small *ngIf="labelInvalid" class="p-error">Label is required.</small>
         </div>
         <div class="field">
           <label htmlFor="icon">Icon</label>
@@ -47,7 +48,7 @@
           <label htmlFor="router-link">Router Link</label>
           <input pInputText id="router-link" type="text" formControlName="routerLink" />
         </div>
-        <p-button label="Update" (click)="onEditSubmit()"></p-button>
+        <p-button label="Update" [disabled]="!menuItemForm.valid" (click)="onEditSubmit()"></p-button>
       </form>
     </div>
   </ng-template>
