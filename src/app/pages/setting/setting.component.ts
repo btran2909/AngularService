@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { TreeNode } from 'primeng/api';
-import { NodeService } from 'src/app/services/node.service';
+import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
+import {
+  selectMenuItemError,
+  selectMenuItemLoading,
+  selectMenuItems,
+} from 'src/app/stores/layouts/layout.selector';
+import { LayoutState } from 'src/app/stores/layouts/layout.state';
 
 @Component({
   selector: 'app-setting',
@@ -8,19 +15,45 @@ import { NodeService } from 'src/app/services/node.service';
   styleUrl: './setting.component.scss',
 })
 export class SettingComponent {
-  files2: TreeNode[] = [];
-  selectedFiles2: TreeNode<any>[] = [];
-  cols: any[] = [];
+  dataTable: TreeNode[] = [];
+  selectedDataTable: TreeNode<any>[] = [];
+  columns: any[] = [];
 
-  constructor(private nodeService: NodeService) {}
+  menuItems$ = this.layoutStore.pipe(select(selectMenuItems));
+  loading$ = this.layoutStore.pipe(select(selectMenuItemLoading));
+  error$ = this.layoutStore.pipe(select(selectMenuItemError));
+
+  constructor(private layoutStore: Store<LayoutState>) {}
 
   ngOnInit() {
-    this.nodeService.getFilesystem().then((files) => (this.files2 = files));
-
-    this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'size', header: 'Size' },
-      { field: 'type', header: 'Type' }
+    this.columns = [
+      { field: 'label', header: 'Label' },
+      { field: 'icon', header: 'Icon' },
+      { field: 'routerLink', header: 'Router Link' },
     ];
+    this.menuItems$.subscribe((data: IMenuItemDto[]) => {
+      this.dataTable = this.mapToDataTable(data);
+    });
+  }
+
+  private mapToDataTable(menuItemDto: IMenuItemDto[]) {
+    return menuItemDto.map((item: IMenuItemDto) => {
+      const angularItem: any = {
+        data: {
+          label: item.label,
+          icon: item.icon,
+          routerLink: item.routerLink,
+        },
+        children: item.childMenuItems
+          ? this.mapToDataTable(item.childMenuItems)
+          : null,
+      };
+
+      if (item.childMenuItems && item.childMenuItems.length > 0) {
+        angularItem.children = this.mapToDataTable(item.childMenuItems);
+      }
+
+      return angularItem;
+    });
   }
 }
