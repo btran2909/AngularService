@@ -1,4 +1,4 @@
-import { IMenuItemDto } from "src/app/shared/models/menu-items/menu-item-dto.model";
+import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
 
 export interface LayoutState {
   menuItems: IMenuItemDto[];
@@ -6,8 +6,8 @@ export interface LayoutState {
   error: any;
 }
 
-export const layoutState: LayoutState = {
+export const initialLayoutState: LayoutState = {
   menuItems: [],
   loading: false,
-  error: null
+  error: null,
 };

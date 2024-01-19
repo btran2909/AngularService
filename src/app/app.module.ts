@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -9,21 +10,16 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layouts/layout.module';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { LoadingInterceptor } from './shared/interceptors/loading-interceptor';
-import { layoutReducer } from './stores/layouts/layout.reducer';
-import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent
-  ],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    LayoutModule,
-    StoreModule.forRoot({ angular: layoutReducer }),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    LayoutModule,
   ],
   providers: [
     { provide: 'API_BASE_URL', useValue: environment.baseUrl },
@@ -33,6 +29,6 @@ import { EffectsModule } from '@ngrx/effects';
       multi: true,
     },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,12 +1,11 @@
 <div class="grid">
   <div class="col-12">
-    <div class="card">
-      <h5>TreeTable</h5>
-      <p-treeTable [value]="files2" [columns]="cols" selectionMode="checkbox" [selection]="selectedFiles2">
+    <div *ngIf="dataTable && !!dataTable.length" class="card">
+      <p-treeTable [value]="dataTable" [columns]="columns" selectionMode="checkbox" [selection]="selectedDataTable">
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of columns">
-              {{col.header}}
+            <th *ngFor="let col of columns" [attr.id]="col.id">
+              {{ col.header }}
             </th>
           </tr>
         </ng-template>

@@ -1,14 +1,25 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { EventState } from '..';
+import { LayoutState } from './layout.state';
 
-export const getEventState = createFeatureSelector<EventState>('event');
+export const selectMenuItemState = createFeatureSelector<LayoutState>('layout');
 
-export const getMenuItemState = createSelector(
-  getEventState,
+export const selectMenuItems = createSelector(
+  selectMenuItemState,
   (state) => state.menuItems
 );
 
-export const getMenuItems = createSelector(
-  getMenuItemState,
-  (state) => state.menuItems
+export const selectMenuItemLoading = createSelector(
+  selectMenuItemState,
+  (state) => state.loading
 );
+
+export const selectMenuItemError = createSelector(
+  selectMenuItemState,
+  (state) => state.error
+);
+
+export const LayoutSelectors = {
+  selectMenuItems,
+  selectMenuItemLoading,
+  selectMenuItemError,
+};
