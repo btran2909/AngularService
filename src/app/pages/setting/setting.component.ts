@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { TreeNode } from 'primeng/api';
-import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
+import { ConfirmationService, TreeNode } from 'primeng/api';
+import { OverlayPanel } from 'primeng/overlaypanel';
+import { IMenuItemDto } from 'src/app/shared/models';
+import { LayoutActions } from 'src/app/stores/layouts/layout.action';
 import {
   selectMenuItemError,
   selectMenuItemLoading,
@@ -13,26 +16,69 @@ import { LayoutState } from 'src/app/stores/layouts/layout.state';
   selector: 'app-setting',
   templateUrl: './setting.component.html',
   styleUrl: './setting.component.scss',
+  providers: [ConfirmationService],
 })
 export class SettingComponent {
   dataTable: TreeNode[] = [];
   selectedDataTable: TreeNode<any>[] = [];
   columns: any[] = [];
+  menuItemForm: FormGroup;
 
   menuItems$ = this.layoutStore.pipe(select(selectMenuItems));
   loading$ = this.layoutStore.pipe(select(selectMenuItemLoading));
   error$ = this.layoutStore.pipe(select(selectMenuItemError));
 
-  constructor(private layoutStore: Store<LayoutState>) {}
+  @ViewChild('overlayPanelEdit') overlayPanelEdit: OverlayPanel;
+
+  constructor(
+    private fb: FormBuilder,
+    private layoutStore: Store<LayoutState>,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit() {
     this.columns = [
       { field: 'label', header: 'Label' },
       { field: 'icon', header: 'Icon' },
       { field: 'routerLink', header: 'Router Link' },
+      { field: '', header: 'Action' },
     ];
     this.menuItems$.subscribe((data: IMenuItemDto[]) => {
       this.dataTable = this.mapToDataTable(data);
+    });
+  }
+
+  onEditComplete(rowData: any) {
+    this.layoutStore.dispatch(LayoutActions.updateMenuItem({ data: rowData }));
+  }
+
+  onEditSubmit() {
+    this.layoutStore.dispatch(LayoutActions.updateMenuItem({ data: this.menuItemForm.value }));
+  }
+
+  toggleEditOverlayPanel(event: Event, rowData: any) {
+    this.initMenuItemForm(rowData);
+    this.overlayPanelEdit.toggle(event);
+  }
+
+  deleteConfirm(event: Event, rowData: any) {
+    this.confirmationService.confirm({
+      key: 'deleteConfirm',
+      target: event.target || new EventTarget(),
+      message: `Are you sure delete menu item '${rowData.label}'?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.layoutStore.dispatch(LayoutActions.deleteMenuItem({ id: rowData.id }));
+      }
+    });
+  }
+
+  private initMenuItemForm(rowData: any) {
+    this.menuItemForm = this.fb.group({
+      id: [rowData.id],
+      label: [rowData.label, Validators.required],
+      icon: [rowData.icon],
+      routerLink: [rowData.routerLink]
     });
   }
 
@@ -40,6 +86,7 @@ export class SettingComponent {
     return menuItemDto.map((item: IMenuItemDto) => {
       const angularItem: any = {
         data: {
+          id: item.id,
           label: item.label,
           icon: item.icon,
           routerLink: item.routerLink,

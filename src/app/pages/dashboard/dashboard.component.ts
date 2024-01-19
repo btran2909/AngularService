@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { LayoutService } from 'src/app/layouts/layout.service';
 import { ProductService } from 'src/app/services/product.service';
-import { Product } from 'src/app/shared/models/dashboard/product';
+import { IProduct } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,7 +13,7 @@ import { Product } from 'src/app/shared/models/dashboard/product';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   items!: MenuItem[];
-  products!: Product[];
+  products!: IProduct[];
   chartData: any;
   chartOptions: any;
   subscription!: Subscription;

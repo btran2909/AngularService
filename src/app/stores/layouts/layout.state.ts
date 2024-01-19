@@ -1,4 +1,4 @@
-import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
+import { IMenuItemDto } from "src/app/shared/models";
 
 export interface LayoutState {
   menuItems: IMenuItemDto[];

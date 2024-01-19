@@ -1,24 +1,55 @@
-<div class="grid">
-  <div class="col-12">
-    <div *ngIf="dataTable && !!dataTable.length" class="card">
-      <p-treeTable [value]="dataTable" [columns]="columns" selectionMode="checkbox" [selection]="selectedDataTable">
-        <ng-template pTemplate="header" let-columns>
-          <tr>
-            <th *ngFor="let col of columns" [attr.id]="col.id">
-              {{ col.header }}
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
-          <tr>
-            <td *ngFor="let col of columns; let i = index">
-              <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
-              <p-treeTableCheckbox [value]="rowNode" *ngIf="i === 0"></p-treeTableCheckbox>
-              {{rowData[col.field]}}
-            </td>
-          </tr>
-        </ng-template>
-      </p-treeTable>
-    </div>
-  </div>
+<div class="card">
+  <p-treeTable [value]="dataTable" [columns]="columns" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th *ngFor="let col of columns; let i = index; let last = last" [id]="i" [ngClass]="{ 'text-center': last }">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+      <tr [ttRow]="rowNode">
+        <td *ngFor="let col of columns; let i = index; let last = last" ttEditableColumn
+          [ngClass]="{ 'p-toggler-column': i === 0, 'text-center': last }">
+          <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+          <p-treeTableCellEditor *ngIf="!last">
+            <ng-template pTemplate="input">
+              <input pInputText type="text" class="p-inputtext-sm" [ngStyle]="{ width: i == 0 ? '80%' : '100%' }"
+                [(ngModel)]="rowData[col.field]" (change)="onEditComplete(rowData)" />
+            </ng-template>
+            <ng-template pTemplate="output">{{ rowData[col.field] }}</ng-template>
+          </p-treeTableCellEditor>
+          <ng-container *ngIf="last">
+            <p-button icon="pi pi-pencil" [rounded]="true" [style]="{ 'margin-right': '.5em' }"
+              (click)="toggleEditOverlayPanel($event, rowData)"></p-button>
+            <p-button icon="pi pi-trash" [rounded]="true" severity="danger"
+              (click)="deleteConfirm($event, rowData)"></p-button>
+          </ng-container>
+        </td>
+      </tr>
+    </ng-template>
+  </p-treeTable>
 </div>
+
+<p-overlayPanel #overlayPanelEdit [showCloseIcon]="true" [style]="{width: '450px'}">
+  <ng-template pTemplate>
+    <div *ngIf="menuItemForm" class="card p-fluid">
+      <form [formGroup]="menuItemForm">
+        <div class="field">
+          <label htmlFor="label">Label</label>
+          <input pInputText pAutoFocus [autofocus]="true" id="label" type="text" formControlName="label" />
+        </div>
+        <div class="field">
+          <label htmlFor="icon">Icon</label>
+          <input pInputText id="icon" type="text" formControlName="icon" />
+        </div>
+        <div class="field">
+          <label htmlFor="router-link">Router Link</label>
+          <input pInputText id="router-link" type="text" formControlName="routerLink" />
+        </div>
+        <p-button label="Update" (click)="onEditSubmit()"></p-button>
+      </form>
+    </div>
+  </ng-template>
+</p-overlayPanel>
+<p-confirmPopup key="deleteConfirm"></p-confirmPopup>

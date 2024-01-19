@@ -18,5 +18,15 @@ export const layoutReducer = createReducer(
     ...state,
     loading: false,
     error,
-  }))
+  })),
+  on(LayoutActions.updateMenuItem, (state) => ({
+    ...state,
+    loading: true,
+    error: null,
+  })),
+  on(LayoutActions.updateMenuItemFail, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
 );

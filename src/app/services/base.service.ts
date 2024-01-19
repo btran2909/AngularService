@@ -19,12 +19,12 @@ export class BaseService<T> {
     return this.http.get<R>(`${this.baseUrl}/${url}/${id}`);
   }
 
-  create<R>(url: string, entity: T): Observable<R> {
-    return this.http.post<R>(url, entity);
+  create<R>(url: string, payload: T): Observable<R> {
+    return this.http.post<R>(url, payload);
   }
 
-  update<R>(url: string, id: number, entity: T): Observable<R> {
-    return this.http.put<R>(`${this.baseUrl}/${url}/${id}`, entity);
+  update<R>(url: string, payload: T): Observable<R> {
+    return this.http.put<R>(`${this.baseUrl}/${url}`, payload);
   }
 
   delete<R>(url: string, id: number): Observable<R> {

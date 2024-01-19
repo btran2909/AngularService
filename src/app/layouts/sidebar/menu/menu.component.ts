@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { IMenuItemDto } from 'src/app/shared/models/menu-items/menu-item-dto.model';
 import { LayoutActions } from 'src/app/stores/layouts/layout.action';
 import {
   selectMenuItemError,
@@ -9,6 +8,7 @@ import {
 } from 'src/app/stores/layouts/layout.selector';
 import { LayoutState } from 'src/app/stores/layouts/layout.state';
 import { LayoutService } from '../../layout.service';
+import { IMenuItemDto } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-menu',
