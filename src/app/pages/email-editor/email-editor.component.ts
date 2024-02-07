@@ -53,11 +53,8 @@ export class EmailEditorComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    const layoutMainElement =
-      this.elementRef.nativeElement.closest('.layout-main');
-    if (layoutMainElement) {
-      this.minHeight = layoutMainElement.offsetHeight + 'px';
-    }
+    const screenHeight = window.screen.height - 300;
+    if (screenHeight > 500) this.minHeight = screenHeight + 'px';
   }
 
   ngAfterViewInit() {
