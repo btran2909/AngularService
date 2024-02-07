@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { LayoutService } from '../layout.service';
+import { SETTING } from 'src/app/shared/constants/routes/index.route';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,6 +11,7 @@ import { LayoutService } from '../layout.service';
 export class TopBarComponent {
   items!: MenuItem[];
   isLightMode: boolean = false;
+  settingPath = SETTING.PATH;
 
   @ViewChild('menuButton') menuButton!: ElementRef;
   @ViewChild('topBarMenuButton') topBarMenuButton!: ElementRef;
