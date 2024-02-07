@@ -1,0 +1,5 @@
+<div [id]="id" class="unlayer-editor" [style.min-height]="minHeight"></div>
+<div *ngIf="!isLoading" class="footer-action">
+  <p-button label="Save Design" severity="success" size="small" [disabled]="isLoading" (click)="saveDesign()"></p-button>
+  <p-button label="Export HTML" size="small" [disabled]="isLoading" (click)="exportHtml()"></p-button>
+</div>

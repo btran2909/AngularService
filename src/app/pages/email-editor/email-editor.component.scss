@@ -1,0 +1,22 @@
+:host {
+  flex: 1;
+  display: flex;
+}
+
+.unlayer-editor {
+  flex: 1;
+  display: flex;
+}
+
+.footer-action {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 351px;
+  height: 50px;
+  position: absolute;
+  right: 28px;
+  bottom: 62px;
+  background-color: #ffffff;
+}
