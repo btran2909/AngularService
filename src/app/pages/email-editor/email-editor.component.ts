@@ -1,11 +1,10 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
   EventEmitter,
   Input,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { loadScript } from './load-script';
 import { sampleData } from './sample';
@@ -45,14 +44,19 @@ export class EmailEditorComponent implements OnInit, AfterViewInit {
   @Output() loaded = new EventEmitter();
   @Output() ready = new EventEmitter();
 
+  footerActionRight: number = 28;
   editor: any;
   isLoading: boolean = true;
+  isShowResultModal: boolean = false;
+  modalTitle: string = '';
+  editorContent: string = '';
 
-  constructor(private elementRef: ElementRef) {
+  constructor() {
     this.id = this.editorId || `editor-${++lastEditorId}`;
   }
 
   ngOnInit() {
+    if (window.screen.width > 1600) this.footerActionRight = 100;
     const screenHeight = window.screen.height - 300;
     if (screenHeight > 500) this.minHeight = screenHeight + 'px';
   }
@@ -67,7 +71,9 @@ export class EmailEditorComponent implements OnInit, AfterViewInit {
 
   saveDesign() {
     this.editor.saveDesign((design: any) => {
-      console.log('saveDesign', JSON.stringify(design));
+      this.editorContent = JSON.stringify(design);
+      this.modalTitle = 'Save Design';
+      this.isShowResultModal = true;
     });
   }
 
@@ -77,8 +83,16 @@ export class EmailEditorComponent implements OnInit, AfterViewInit {
         .replace(/\\n\\n/g, ' ')
         .replace(/\\n/g, ' ')
         .replace(/\\"/g, '"');
-      console.log('exportHtml', html);
+      this.editorContent = html;
+      this.modalTitle = 'Export HTML';
+      this.isShowResultModal = true;
     });
+  }
+
+  copyContent() {
+    const textarea = document.querySelector('textarea') as HTMLTextAreaElement;
+    textarea.select();
+    document.execCommand('copy');
   }
 
   protected loadEditor() {

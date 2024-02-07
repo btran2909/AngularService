@@ -1,6 +1,24 @@
 :host {
   flex: 1;
   display: flex;
+  ::ng-deep {
+    p-dialog {
+      .ui-dialog-title {
+        display: flex;
+        align-items: center;
+      }
+      .modal-result {
+        .p-inputtext:enabled {
+          &:hover, &:focus {
+            border: none;
+          }
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
 }
 
 .unlayer-editor {
@@ -16,7 +34,7 @@
   width: 352px;
   height: 49px;
   position: absolute;
-  right: 100px;
   bottom: 75px;
   background-color: #ffffff;
 }
+
