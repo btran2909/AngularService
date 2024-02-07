@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -31,7 +32,7 @@ let lastEditorId = 0;
   templateUrl: './email-editor.component.html',
   styleUrl: './email-editor.component.scss',
 })
-export class EmailEditorComponent implements OnInit {
+export class EmailEditorComponent implements OnInit, AfterViewInit {
   @Input() editorId: string;
   @Input() options: UnlayerOptions = {};
   @Input() projectId: number;
@@ -57,6 +58,9 @@ export class EmailEditorComponent implements OnInit {
     if (layoutMainElement) {
       this.minHeight = layoutMainElement.offsetHeight + 'px';
     }
+  }
+
+  ngAfterViewInit() {
     loadScript(this.loadEditor.bind(this));
   }
 
