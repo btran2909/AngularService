@@ -2,9 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { LayoutService } from 'src/app/layouts/layout.service';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct } from 'src/app/shared/models';
+import { LayoutService } from '../layout/layout.service';
 
 @Component({
   selector: 'app-dashboard',

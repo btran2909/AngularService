@@ -1,0 +1,103 @@
+// Define display values
+$display-values: (
+  none,
+  inline,
+  inline-block,
+  block,
+  table,
+  table-cell,
+  table-row,
+  flex,
+  inline-flex
+);
+
+// Generate classes for display property
+@each $value in $display-values {
+  .d-#{$value} {
+    display: $value;
+  }
+}
+
+// Define the breakpoints
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// Define common values
+$common-values: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  around: space-around,
+  between: space-between,
+  baseline: baseline,
+  stretch: stretch
+);
+
+// Generate utility classes
+@mixin generate-classes($prefix, $properties, $breakpoints: null) {
+  @each $key, $value in $properties {
+    .#{$prefix}-#{$key} {
+      #{$prefix}: $value;
+    }
+
+    @if $breakpoints {
+      @each $breakpoint, $size in $breakpoints {
+        .#{$prefix}-#{$breakpoint}-#{$key} {
+          @media (min-width: $size) {
+            #{$prefix}: $value;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Generate classes for justify-content
+@include generate-classes('justify-content', $common-values, $breakpoints);
+
+// Generate classes for align-items
+@include generate-classes('align-items', $common-values, $breakpoints);
+
+// Generate classes for align-self
+@include generate-classes('align-self', $common-values, $breakpoints);
+
+// Generate classes for flex-wrap
+@include generate-classes('flex-wrap', (
+  nowrap: nowrap,
+  wrap: wrap,
+  wrap-reverse: wrap-reverse
+), $breakpoints);
+
+// Generate classes for order
+@include generate-classes('order', (
+  0: 0,
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6,
+  7: 7,
+  8: 8,
+  9: 9,
+  10: 10,
+  11: 11,
+  12: 12
+), $breakpoints);
+
+// Generate classes for align-content
+@include generate-classes('align-content', $common-values, $breakpoints);
+
+// Generate classes for gap
+@for $i from 5 through 100 {
+  .gap-#{$i} > * {
+    margin-right: #{$i}px;
+  }
+  .gap-#{$i} > *:last-child {
+    margin-right: 0;
+  }
+}

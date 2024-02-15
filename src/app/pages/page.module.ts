@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { PAGE_DECLARATIONS } from './declarations';
+import { LayoutModule } from './layout/layout.module';
 import { PageRoutingModule } from './page-routing.module';
 
 @NgModule({
-  declarations: PAGE_DECLARATIONS,
-  imports: [CommonModule, PageRoutingModule],
+  declarations: [],
+  imports: [CommonModule, PageRoutingModule, LayoutModule],
 })
 export class PageModule {}

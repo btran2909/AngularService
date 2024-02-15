@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutComponent } from './layouts/layout.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { AUTH, ERROR } from './shared/constants/routes/index.route';
+import { ADMIN, AUTH, ERROR } from './shared/constants/routes/index.route';
+import { AdminLayoutComponent } from './admin/layout/layout.component';
+import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,16 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: () => import('./pages/page.module').then((m) => m.PageModule),
+      },
+    ],
+  },
+  {
+    path: ADMIN.PATH,
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
       },
     ],
   },

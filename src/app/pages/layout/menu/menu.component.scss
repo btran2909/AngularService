@@ -1,0 +1,13 @@
+:host ::ng-deep {
+  p-menubar {
+    width: 100%;
+    .p-menubar {
+      border: none;
+      background-color: transparent;
+      border-radius: 0;
+      .shopping-cart {
+        min-width: 120px;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { ADMIN } from "./admin.route";
 import { AUTH } from "./auth.route";
 import { EMAIL_EDITOR } from "./email-editor.route";
 import { ERROR } from "./error.route";
@@ -7,5 +8,6 @@ export {
   AUTH,
   ERROR,
   SETTING,
-  EMAIL_EDITOR
+  EMAIL_EDITOR,
+  ADMIN
 };

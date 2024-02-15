@@ -1,0 +1,23 @@
+<div class="layout-topbar">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <a class="layout-topbar-logo">
+        <img src="assets/images/{{layoutService.config().colorScheme === 'light' ? 'logo-dark' : 'logo-white'}}.svg" height="40" class="mr-2" alt="logo">
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="d-flex align-items-center">
+        <button *ngIf="isLightMode" class="p-link layout-topbar-button" (click)="changeTheme('bootstrap4-light-blue', 'light')">
+          <i class="pi pi-moon"></i>
+          <span>Mode light</span>
+        </button>
+        <button *ngIf="!isLightMode" class="p-link layout-topbar-button" (click)="changeTheme('bootstrap4-dark-blue', 'dark')">
+          <i class="pi pi-moon"></i>
+          <span>Mode dark</span>
+        </button>
+        <input type="text" pInputText placeholder="Search" class="p-inputtext-sm ml-3" />
+        <p-button label="Giỏ hàng" icon="pi pi-shopping-cart" size="small" class="shopping-cart ml-3"></p-button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

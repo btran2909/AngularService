@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { IMenuChangeEvent } from '../shared/models';
+import { IMenuChangeEvent } from 'src/app/shared/models';
 
 @Injectable({
   providedIn: 'root',

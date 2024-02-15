@@ -8,10 +8,10 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { StyleClassModule } from 'primeng/styleclass';
 import { TableModule } from 'primeng/table';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { PAGE_DASHBOARD_DECLARATIONS } from './declarations';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
-  declarations: PAGE_DASHBOARD_DECLARATIONS,
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     FormsModule,

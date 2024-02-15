@@ -11,7 +11,7 @@ import { filter } from 'rxjs/operators';
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss',
 })
-export class LayoutComponent implements OnDestroy {
+export class AdminLayoutComponent implements OnDestroy {
   overlayMenuOpenSubscription: Subscription;
 
   menuOutsideClickListener: any;

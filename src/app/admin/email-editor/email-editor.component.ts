@@ -117,7 +117,7 @@ export class EmailEditorComponent implements OnInit, AfterViewInit {
     this.editor = unlayer.createEditor({
       ...options,
       id: this.id,
-      displayMode: 'email',
+      displayMode: 'email', // 'email' | 'web'
       source: {
         name: 'email-editor',
         version: '0.0.1',
