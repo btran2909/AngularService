@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 import { IProduct } from 'src/app/shared/models';
 
@@ -13,7 +14,7 @@ export class HomeComponent implements OnInit {
   layout: 'list' | 'grid' = 'grid';
   loading: boolean = false;
 
-  constructor(private productService: ProductService) { }
+  constructor(private router: Router, private productService: ProductService) { }
 
   ngOnInit() {
     this.productService.getProductsSmall().then((products) => {
@@ -58,5 +59,9 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
         this.loading = false
     }, 2000);
+  }
+
+  goToProductDetail(product: IProduct) {
+    this.router.navigate([`/product-detail/${product.id}`]);
   }
 }

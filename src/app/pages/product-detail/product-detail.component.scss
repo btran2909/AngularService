@@ -1,0 +1,17 @@
+:host ::ng-deep {
+  ul.p-tabview-nav {
+    justify-content: center;
+  }
+
+  p.description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .button-action {
+    button {
+      width: 100%;
+    }
+  }
+}

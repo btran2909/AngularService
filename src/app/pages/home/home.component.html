@@ -28,7 +28,7 @@
               </span>
               <p-tag [value]="product.inventoryStatus" [severity]="getSeverity(product)"></p-tag>
             </div>
-            <div class="flex flex-column align-items-center gap-3 py-5">
+            <div class="flex flex-column align-items-center gap-3 py-5 cursor-ponter" (click)="goToProductDetail(product)">
               <img class="w-9 shadow-2 border-round"
                 [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image"
                 [alt]="product.name" />

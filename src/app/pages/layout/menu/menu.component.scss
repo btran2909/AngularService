@@ -1,13 +1,21 @@
 :host ::ng-deep {
   p-menubar {
     width: 100%;
+
     .p-menubar {
       border: none;
       background-color: transparent;
       border-radius: 0;
+
       .shopping-cart {
         min-width: 120px;
       }
     }
+  }
+
+  .p-element.p-dropdown-label.p-inputtext,
+  .p-ripple.p-element.p-dropdown-item {
+    font-size: 0.875rem;
+    padding: 0.4375rem 0.65625rem;
   }
 }
