@@ -1,40 +1,30 @@
 import { createAction, props } from '@ngrx/store';
 import { IMenuItemDto, IMenuItemUpdateDto } from 'src/app/shared/models';
 
-export const loadMenuItems = createAction('[Menu Item] Load Menu Items');
-export const loadMenuItemsSuccess = createAction(
+export const LoadMenuItems = createAction('[Menu Item] Load Menu Items');
+export const LoadMenuItemsSuccess = createAction(
   '[Menu Item] Load Menu Items Success',
   props<{ data: IMenuItemDto[] }>()
 );
-export const loadMenuItemsFail = createAction(
+export const LoadMenuItemsFail = createAction(
   '[Menu Item] Load Menu Items Fail',
   props<{ error: any }>()
 );
 
-export const updateMenuItem = createAction(
+export const UpdateMenuItem = createAction(
   '[Menu Item] Update Menu Item',
   props<{ data: IMenuItemUpdateDto }>()
 );
-export const updateMenuItemFail = createAction(
+export const UpdateMenuItemFail = createAction(
   '[Menu Item] Update Menu Item Fail',
   props<{ error: any }>()
 );
 
-export const deleteMenuItem = createAction(
+export const DeleteMenuItem = createAction(
   '[Menu Item] Delete Menu Item',
   props<{ id: string }>()
 );
-export const deleteMenuItemFail = createAction(
+export const DeleteMenuItemFail = createAction(
   '[Menu Item] Delete Menu Item Fail',
   props<{ error: any }>()
 );
-
-export const LayoutActions = {
-  loadMenuItems,
-  loadMenuItemsSuccess,
-  loadMenuItemsFail,
-  updateMenuItem,
-  updateMenuItemFail,
-  deleteMenuItem,
-  deleteMenuItemFail,
-};

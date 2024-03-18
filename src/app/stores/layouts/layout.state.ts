@@ -6,7 +6,7 @@ export interface LayoutState {
   error: any;
 }
 
-export const initialLayoutState: LayoutState = {
+export const LayoutState: LayoutState = {
   menuItems: [],
   loading: false,
   error: null,

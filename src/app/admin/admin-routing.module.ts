@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EMAIL_EDITOR, SETTING } from '../shared/constants/routes/index.route';
+import { MAIL_TEMPLATE, SETTING } from '../shared/constants/routes/index.route';
 
 const routes: Routes = [
   {
@@ -12,7 +12,7 @@ const routes: Routes = [
     loadChildren: () => import('./setting/setting.module').then((m) => m.SettingModule),
   },
   {
-    path: EMAIL_EDITOR.PATH,
+    path: MAIL_TEMPLATE.PATH,
     loadChildren: () => import('./email-editor/email-editor.module').then((m) => m.EmailEditorModule),
   }
 ];

@@ -1,32 +1,38 @@
 import { createReducer, on } from '@ngrx/store';
-import { LayoutActions } from './layout.action';
-import { initialLayoutState } from './layout.state';
+import {
+  LoadMenuItems,
+  LoadMenuItemsFail,
+  LoadMenuItemsSuccess,
+  UpdateMenuItem,
+  UpdateMenuItemFail,
+} from './layout.action';
+import { LayoutState } from './layout.state';
 
-export const layoutReducer = createReducer(
-  initialLayoutState,
-  on(LayoutActions.loadMenuItems, (state) => ({
+export const LayoutReducer = createReducer(
+  LayoutState,
+  on(LoadMenuItems, (state) => ({
     ...state,
     loading: true,
     error: null,
   })),
-  on(LayoutActions.loadMenuItemsSuccess, (state, { data }) => ({
+  on(LoadMenuItemsSuccess, (state, { data }) => ({
     ...state,
     menuItems: data,
     loading: false,
   })),
-  on(LayoutActions.loadMenuItemsFail, (state, { error }) => ({
+  on(LoadMenuItemsFail, (state, { error }) => ({
     ...state,
     loading: false,
     error,
   })),
-  on(LayoutActions.updateMenuItem, (state) => ({
+  on(UpdateMenuItem, (state) => ({
     ...state,
     loading: true,
     error: null,
   })),
-  on(LayoutActions.updateMenuItemFail, (state, { error }) => ({
+  on(UpdateMenuItemFail, (state, { error }) => ({
     ...state,
     loading: false,
     error,
-  })),
+  }))
 );

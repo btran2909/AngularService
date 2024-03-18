@@ -14,9 +14,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { RippleModule } from 'primeng/ripple';
 import { SidebarModule } from 'primeng/sidebar';
+import { LayoutEffects } from 'src/app/stores/layouts';
+import { LayoutReducer } from 'src/app/stores/layouts/layout.reducer';
 import { LAYOUT_DECLARATIONS } from './declarations';
-import { layoutReducer } from 'src/app/stores/layouts/layout.reducer';
-import { MenuItemEffects } from 'src/app/stores/layouts/layout.effect';
 
 @NgModule({
   declarations: LAYOUT_DECLARATIONS,
@@ -34,8 +34,8 @@ import { MenuItemEffects } from 'src/app/stores/layouts/layout.effect';
     InputSwitchModule,
     RippleModule,
     RouterModule,
-    StoreModule.forFeature('layout', layoutReducer),
-    EffectsModule.forFeature([MenuItemEffects]),
+    StoreModule.forFeature('layout', LayoutReducer),
+    EffectsModule.forFeature([LayoutEffects]),
   ],
 })
 export class LayoutModule {}

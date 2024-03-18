@@ -4,11 +4,11 @@ import { Store, select } from '@ngrx/store';
 import { ConfirmationService, TreeNode } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { IMenuItemDto } from 'src/app/shared/models';
-import { LayoutActions } from 'src/app/stores/layouts/layout.action';
+import { DeleteMenuItem, UpdateMenuItem } from 'src/app/stores/layouts';
 import {
-  selectMenuItemError,
-  selectMenuItemLoading,
-  selectMenuItems,
+  SelectorLayoutError,
+  SelectorLayoutLoading,
+  SelectorMenuItems,
 } from 'src/app/stores/layouts/layout.selector';
 import { LayoutState } from 'src/app/stores/layouts/layout.state';
 
@@ -24,9 +24,9 @@ export class SettingComponent {
   columns: any[] = [];
   menuItemForm: FormGroup;
 
-  menuItems$ = this.layoutStore.pipe(select(selectMenuItems));
-  loading$ = this.layoutStore.pipe(select(selectMenuItemLoading));
-  error$ = this.layoutStore.pipe(select(selectMenuItemError));
+  menuItems$ = this.layoutStore.pipe(select(SelectorMenuItems));
+  loading$ = this.layoutStore.pipe(select(SelectorLayoutLoading));
+  error$ = this.layoutStore.pipe(select(SelectorLayoutError));
 
   @ViewChild('overlayPanelEdit') overlayPanelEdit: OverlayPanel;
 
@@ -53,12 +53,12 @@ export class SettingComponent {
   }
 
   onEditComplete(rowData: any) {
-    this.layoutStore.dispatch(LayoutActions.updateMenuItem({ data: rowData }));
+    this.layoutStore.dispatch(UpdateMenuItem({ data: rowData }));
   }
 
   onEditSubmit() {
     if (!this.menuItemForm.valid) return;
-    this.layoutStore.dispatch(LayoutActions.updateMenuItem({ data: this.menuItemForm.value }));
+    this.layoutStore.dispatch(UpdateMenuItem({ data: this.menuItemForm.value }));
   }
 
   toggleEditOverlayPanel(event: Event, rowData: any) {
@@ -73,7 +73,7 @@ export class SettingComponent {
       message: `Are you sure delete menu item '${rowData.label}'?`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.layoutStore.dispatch(LayoutActions.deleteMenuItem({ id: rowData.id }));
+        this.layoutStore.dispatch(DeleteMenuItem({ id: rowData.id }));
       }
     });
   }

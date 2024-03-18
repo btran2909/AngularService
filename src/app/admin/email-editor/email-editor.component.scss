@@ -1,40 +1,6 @@
-:host {
-  flex: 1;
-  display: flex;
-  ::ng-deep {
-    p-dialog {
-      .ui-dialog-title {
-        display: flex;
-        align-items: center;
-      }
-      .modal-result {
-        .p-inputtext:enabled {
-          &:hover, &:focus {
-            border: none;
-          }
-          &:focus {
-            box-shadow: none;
-          }
-        }
-      }
-    }
-  }
+.read-more {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
 }
-
-.unlayer-editor {
-  flex: 1;
-  display: flex;
-}
-
-.footer-action {
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 352px;
-  height: 49px;
-  position: absolute;
-  bottom: 75px;
-  background-color: #ffffff;
-}
-

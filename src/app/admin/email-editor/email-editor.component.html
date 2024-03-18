@@ -1,20 +1,47 @@
-<div [id]="id" class="unlayer-editor" [style.min-height]="minHeight"></div>
+<div class="card">
+  <p-table [value]="mailTemplates?.items ?? []" dataKey="id" [rows]="mailTemplates?.size" [tableStyle]="{'min-width': '60rem'}"
+    [loading]="loading">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <p-button label="Add" icon="pi pi-plus" size="small" [outlined]="true"></p-button>
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" placeholder="Search keyword" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="templateName" style="width:20%">Template Name <p-sortIcon field="templateName"></p-sortIcon></th>
+        <th pSortableColumn="contentJson" style="width:20%">Content Json <p-sortIcon field="contentJson"></p-sortIcon></th>
+        <th pSortableColumn="templateContent" style="width:20%">Template Content <p-sortIcon field="templateContent"></p-sortIcon></th>
+        <th pSortableColumn="lastModificationTime" style="width:20%">Last Modification Time <p-sortIcon field="lastModificationTime"></p-sortIcon></th>
+        <th pSortableColumn="creationTime" style="width:20%">Creation Time <p-sortIcon field="creationTime"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+      <tr>
+        <td>{{ item.templateName }}</td>
+        <td class="read-more" (click)="visibleContentJson = true">
+          {{ item.contentJson }}
+        </td>
+        <td class="read-more" (click)="visibleTemplateContent = true">
+          {{ item.templateContent }}
+        </td>
+        <td>{{ item.lastModificationTime | date: 'MM/dd/yyyy' }}</td>
+        <td>{{ item.creationTime | date: 'MM/dd/yyyy' }}</td>
+      </tr>
 
-<div *ngIf="!isLoading" class="footer-action" [style.right.px]="footerActionRight">
-  <p-button label="Save Design" severity="success" size="small" [disabled]="isLoading"
-    (click)="saveDesign()"></p-button>
-  <p-button label="Export HTML" size="small" [disabled]="isLoading" (click)="exportHtml()"></p-button>
+      <p-dialog [(visible)]="visibleContentJson" [style]="{width: '50vw'}">{{ item.contentJson }}</p-dialog>
+      <p-dialog [(visible)]="visibleTemplateContent" [style]="{width: '50vw'}">{{ item.templateContent }}</p-dialog>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No items found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <p-paginator [first]="mailTemplates?.page ?? 1" [rows]="mailTemplates?.size ?? 0"
+    [totalRecords]="mailTemplates?.total ?? 0" [rowsPerPageOptions]="[5, 10, 20, 50]"></p-paginator>
 </div>
 
-<p-dialog [header]="modalTitle" [(visible)]="isShowResultModal" [style]="{ width: '50vw' }" [maximizable]="true">
-  <ng-template pTemplate="header">
-    <div class="ui-dialog-title">
-      <h4 class="mb-0">{{modalTitle}}</h4>
-      <p-button icon="pi pi-copy" severity="secondary" class="button-copy" [rounded]="true" [text]="true"
-      (click)="copyContent()"></p-button>
-    </div>
-  </ng-template>
-  <div class="modal-result">
-    <textarea pInputTextarea class="w-full border-none" [autoResize]="true" [value]="editorContent"></textarea>
-  </div>
-</p-dialog>

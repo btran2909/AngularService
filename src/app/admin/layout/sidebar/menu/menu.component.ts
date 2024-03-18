@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { LayoutActions } from 'src/app/stores/layouts/layout.action';
-import {
-  selectMenuItemError,
-  selectMenuItemLoading,
-  selectMenuItems,
-} from 'src/app/stores/layouts/layout.selector';
-import { LayoutState } from 'src/app/stores/layouts/layout.state';
-import { LayoutService } from '../../layout.service';
 import { IMenuItemDto } from 'src/app/shared/models';
+import { LayoutState, LoadMenuItems, SelectorLayoutError, SelectorLayoutLoading, SelectorMenuItems } from 'src/app/stores/layouts';
+import { LayoutService } from '../../layout.service';
 
 @Component({
   selector: 'app-menu',
@@ -18,9 +12,9 @@ import { IMenuItemDto } from 'src/app/shared/models';
 export class MenuComponent implements OnInit {
   model: any[] = [];
 
-  menuItems$ = this.layoutStore.pipe(select(selectMenuItems));
-  loading$ = this.layoutStore.pipe(select(selectMenuItemLoading));
-  error$ = this.layoutStore.pipe(select(selectMenuItemError));
+  menuItems$ = this.layoutStore.pipe(select(SelectorMenuItems));
+  loading$ = this.layoutStore.pipe(select(SelectorLayoutLoading));
+  error$ = this.layoutStore.pipe(select(SelectorLayoutError));
 
   constructor(
     private layoutStore: Store<LayoutState>,
@@ -28,7 +22,7 @@ export class MenuComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.layoutStore.dispatch(LayoutActions.loadMenuItems());
+    this.layoutStore.dispatch(LoadMenuItems());
 
     this.menuItems$.subscribe((data: IMenuItemDto[]) => {
       this.model = this.mapToAngularFormat(data);
